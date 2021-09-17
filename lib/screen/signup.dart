@@ -66,6 +66,18 @@ class _SignupPageState extends State {
                     buttonText: '登録', 
                     onPressed: () {
                       FocusScope.of(context).unfocus();
+                      showGeneralDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        transitionDuration: Duration(milliseconds: 250),
+                        barrierColor: Colors.black.withOpacity(0.5),
+                        pageBuilder: (BuildContext context, Animation animation,
+                            Animation secondaryAnimation) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      );
                       _authController.createUserWithEmailAndPassword(
                         emailControlller.text, 
                         passwordControlller.text

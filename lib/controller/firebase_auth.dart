@@ -7,6 +7,7 @@ class AuthController extends GetxController {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email',]);
 
+
   // メールアドレスとパスワードを使ってユーザー登録
   Future createUserWithEmailAndPassword(String email, String password) async {
     try {
@@ -17,6 +18,7 @@ class AuthController extends GetxController {
       print('Create user successful.');
       print('Email : ' + result.user!.displayName.toString());
       print('UserId : ' + result.user!.uid);
+      Get.back();
       Get.back();
       Get.snackbar(
         "通知",

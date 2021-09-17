@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Button extends StatelessWidget{
+class Button extends StatelessWidget {
   Button({required this.buttonText, required this.onPressed});
 
   final String buttonText;

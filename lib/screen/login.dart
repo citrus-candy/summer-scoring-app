@@ -49,20 +49,32 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: 30),
                   Button(
                     buttonText: 'ログイン', 
-                    onPressed: () => {
-                      FocusScope.of(context).unfocus(),
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      showGeneralDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        transitionDuration: Duration(milliseconds: 250),
+                        barrierColor: Colors.black.withOpacity(0.5),
+                        pageBuilder: (BuildContext context, Animation animation,
+                            Animation secondaryAnimation) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      );
                       _authController.signInWithEmailAndPassword(
                         emailControlller.text, 
                         passwordControlller.text
-                      )
+                      );
                     }
                   ),
                   SizedBox(height: 20),
                   Button(
                     buttonText: 'Googleでログイン', 
-                    onPressed: () => {
-                      FocusScope.of(context).unfocus(),
-                      _authController.signInWithGoogle()
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      _authController.signInWithGoogle();
                     }
                   ),
                   Divider(
@@ -73,9 +85,9 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: 20),
                   Button(
                     buttonText: 'ユーザー登録', 
-                    onPressed: () => {
-                      FocusScope.of(context).unfocus(),
-                      Get.toNamed('/signup')
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      Get.toNamed('/signup');
                     }
                   )
                 ],
