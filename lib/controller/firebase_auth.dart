@@ -26,6 +26,7 @@ class AuthController extends GetxController {
         backgroundColor: Colors.green.shade300
       );
     } on FirebaseAuthException catch (e) {
+      Get.back();
       Get.snackbar(
         "エラー",
         e.message.toString(),
@@ -57,6 +58,7 @@ class AuthController extends GetxController {
         backgroundColor: Colors.green.shade300
       );
     } on FirebaseAuthException catch (e) {
+      Get.back();
       Get.snackbar(
         "エラー",
         e.message.toString(),
