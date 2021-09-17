@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.summer_scoring_app">
+    package="com.spino.summer_scoring_app">
    <application
         android:label="summer_scoring_app"
         android:icon="@mipmap/ic_launcher">

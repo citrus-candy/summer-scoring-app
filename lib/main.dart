@@ -1,11 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../screen/top.dart';
 import '../screen/login.dart';
 import '../screen/signup.dart';
+import 'controller/firebase_auth.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  Get.put(AuthController());
+
   runApp(
     GetMaterialApp(
       title: '夏の赤ペン先生',

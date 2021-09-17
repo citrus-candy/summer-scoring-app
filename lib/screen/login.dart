@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/form_password.dart';
-import '../components/form_email.dart';
 import '../components/button.dart';
+import '../controller/firebase_auth.dart';
 
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State {
-  String infoText = '';
+class LoginPage extends StatelessWidget {
+  final AuthController _authController = Get.find();
+  final emailControlller = TextEditingController();
+  final passwordControlller = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -26,20 +22,48 @@ class _LoginPageState extends State {
               SizedBox(height: 40),
               Form(child: Column(
                 children: [
-                  EmailTextFormField(),
+                  Container(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: TextFormField(
+                      controller: emailControlller,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.email),
+                        labelText: 'メールアドレス'
+                      ),
+                    )
+                  ),
                   SizedBox(height: 30),
-                  PasswordTextFormField(),
+                  Container(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: TextFormField(
+                      controller: passwordControlller,
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.vpn_key),
+                        labelText: 'パスワード'
+                      ),
+                    )
+                  ),
                   SizedBox(height: 30),
                   Button(
                     buttonText: 'ログイン', 
-                    onPressed: () {
-                      Get.toNamed('/');
+                    onPressed: () => {
+                      FocusScope.of(context).unfocus(),
+                      _authController.signInWithEmailAndPassword(
+                        emailControlller.text, 
+                        passwordControlller.text
+                      )
                     }
                   ),
                   SizedBox(height: 20),
                   Button(
                     buttonText: 'Googleでログイン', 
-                    onPressed: () {}
+                    onPressed: () => {
+                      FocusScope.of(context).unfocus(),
+                      _authController.signInWithGoogle()
+                    }
                   ),
                   Divider(
                     color: Colors.black,
@@ -49,7 +73,10 @@ class _LoginPageState extends State {
                   SizedBox(height: 20),
                   Button(
                     buttonText: 'ユーザー登録', 
-                    onPressed: () => Get.toNamed('/signup')
+                    onPressed: () => {
+                      FocusScope.of(context).unfocus(),
+                      Get.toNamed('/signup')
+                    }
                   )
                 ],
               )),

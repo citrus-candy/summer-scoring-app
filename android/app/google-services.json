@@ -1,39 +1,46 @@
 {
-  "project_info": {
-    "project_number": "588553651007",
-    "project_id": "summer-scoring-app",
-    "storage_bucket": "summer-scoring-app.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:588553651007:android:24e471496545cc913dc98a",
-        "android_client_info": {
-          "package_name": "com.spino.summer_scoring_app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "588553651007-qn1ogg0d6qkph0m5l3snnb575s33koa2.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDOURa0H4Gn2kK8jDUzBaBwd5MrS9DhOrQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "588553651007-qn1ogg0d6qkph0m5l3snnb575s33koa2.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    }
-  ],
-  "configuration_version": "1"
+	"project_info": {
+		"project_number": "588553651007",
+		"project_id": "summer-scoring-app",
+		"storage_bucket": "summer-scoring-app.appspot.com"
+	},
+	"client": [
+		{
+			"client_info": {
+				"mobilesdk_app_id": "1:588553651007:android:d1ba32152f593aff3dc98a",
+				"android_client_info": {
+					"package_name": "com.spino.summer_scoring_app"
+				}
+			},
+			"oauth_client": [
+				{
+					"client_id": "588553651007-qn1ogg0d6qkph0m5l3snnb575s33koa2.apps.googleusercontent.com",
+					"client_type": 3
+				}
+			],
+			"api_key": [
+				{
+					"current_key": "AIzaSyDOURa0H4Gn2kK8jDUzBaBwd5MrS9DhOrQ"
+				}
+			],
+			"services": {
+				"appinvite_service": {
+					"other_platform_oauth_client": [
+						{
+							"client_id": "588553651007-qn1ogg0d6qkph0m5l3snnb575s33koa2.apps.googleusercontent.com",
+							"client_type": 3
+						},
+						{
+							"client_id": "588553651007-vjlnm2gvk0dmq4q3ncn4lbrggd6vak11.apps.googleusercontent.com",
+							"client_type": 2,
+							"ios_info": {
+								"bundle_id": "com.spino.summer-scoring-app"
+							}
+						}
+					]
+				}
+			}
+		}
+	],
+	"configuration_version": "1"
 }

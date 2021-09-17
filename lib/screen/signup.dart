@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/form_password.dart';
-import '../components/form_email.dart';
 import '../components/button.dart';
+import '../controller/firebase_auth.dart';
 
 class SignupPage extends StatefulWidget{
   @override
@@ -11,6 +10,10 @@ class SignupPage extends StatefulWidget{
 }
 
 class _SignupPageState extends State {
+  final AuthController _authController = Get.find();
+  final emailControlller = TextEditingController();
+  final passwordControlller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +21,7 @@ class _SignupPageState extends State {
         title: Text('ユーザー登録'),
         leading: IconButton(
           onPressed: () {
+            FocusScope.of(context).unfocus();
             Get.back();
           },
           icon: Icon(Icons.arrow_back)
@@ -29,22 +33,45 @@ class _SignupPageState extends State {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset('images/logo.png'),
               SizedBox(height: 40),
               Form(child: Column(
                 children: [
-                  EmailTextFormField(),
+                  Container(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: TextFormField(
+                      controller: emailControlller,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.email),
+                        labelText: 'メールアドレス'
+                      ),
+                    )
+                  ),
                   SizedBox(height: 30),
-                  PasswordTextFormField(),
+                  Container(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: TextFormField(
+                      controller: passwordControlller,
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.vpn_key),
+                        labelText: 'パスワード'
+                      ),
+                    )
+                  ),
                   SizedBox(height: 30),
                   Button(
                     buttonText: '登録', 
-                    onPressed: () {}
-                  ),
-                  SizedBox(height: 40),
-                  Button(
-                    buttonText: 'Googleで登録', 
-                    onPressed: () {}
-                  ),
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      _authController.createUserWithEmailAndPassword(
+                        emailControlller.text, 
+                        passwordControlller.text
+                      );
+                    }
+                  )
                 ],
               )),
             ],
