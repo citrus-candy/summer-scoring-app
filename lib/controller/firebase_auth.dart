@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email',]);
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
 
   // メールアドレスとパスワードを使ってユーザー登録
@@ -51,7 +51,7 @@ class AuthController extends GetxController {
       print('Login successful.');
       print('Email : ' + result.user!.displayName.toString());
       print('UserId : ' + result.user!.uid);
-      Get.toNamed('/');
+      Get.toNamed('/registar');
       Get.snackbar(
         "通知",
         "ログインに成功しました",
@@ -84,7 +84,7 @@ class AuthController extends GetxController {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    Get.toNamed('/');
+    Get.toNamed('/registar');
     Get.snackbar(
       "通知",
       "ログインに成功しました"
@@ -93,7 +93,7 @@ class AuthController extends GetxController {
     return FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-// ログアウト
+  // ログアウト
   Future signOut() async {
     try {
       await auth.signOut();
