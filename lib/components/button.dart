@@ -11,7 +11,7 @@ class Button extends StatelessWidget {
     return ElevatedButton(
       child: Container(
         padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-        child: Text(buttonText, style: TextStyle( fontSize: 20 )),
+        child: Text(buttonText, style: TextStyle(fontSize: 20)),
       ),
       onPressed: () {
         onPressed();

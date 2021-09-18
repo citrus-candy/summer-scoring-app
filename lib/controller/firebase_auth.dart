@@ -7,31 +7,22 @@ class AuthController extends GetxController {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-
   // メールアドレスとパスワードを使ってユーザー登録
   Future createUserWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password
-      );
+          email: email, password: password);
       print('Create user successful.');
       print('Email : ' + result.user!.displayName.toString());
       print('UserId : ' + result.user!.uid);
       Get.back();
       Get.back();
-      Get.snackbar(
-        "通知",
-        "ユーザー登録に成功しました",
-        backgroundColor: Colors.green.shade300
-      );
+      Get.snackbar("通知", "ユーザー登録に成功しました",
+          backgroundColor: Colors.green.shade300);
     } on FirebaseAuthException catch (e) {
       Get.back();
-      Get.snackbar(
-        "エラー",
-        e.message.toString(),
-        backgroundColor: Colors.red.shade300
-      );
+      Get.snackbar("エラー", e.message.toString(),
+          backgroundColor: Colors.red.shade300);
     } catch (e) {
       Get.defaultDialog(
         title: "エラー",
@@ -45,26 +36,17 @@ class AuthController extends GetxController {
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await auth.signInWithEmailAndPassword(
-        email: email, 
-        password: password
-      );
+          email: email, password: password);
       print('Login successful.');
       print('Email : ' + result.user!.displayName.toString());
       print('UserId : ' + result.user!.uid);
       Get.toNamed('/registar');
-      Get.snackbar(
-        "通知",
-        "ログインに成功しました",
-        backgroundColor: Colors.green.shade300
-      );
+      Get.snackbar("通知", "ログインに成功しました", backgroundColor: Colors.green.shade300);
     } on FirebaseAuthException catch (e) {
       Get.back();
-      Get.snackbar(
-        "エラー",
-        e.message.toString(),
-        backgroundColor: Colors.red.shade300
-      );
-    }catch (e) {
+      Get.snackbar("エラー", e.message.toString(),
+          backgroundColor: Colors.red.shade300);
+    } catch (e) {
       Get.defaultDialog(
         title: "エラー",
         middleText: e.toString(),
@@ -85,10 +67,7 @@ class AuthController extends GetxController {
       idToken: googleAuth.idToken,
     );
     Get.toNamed('/registar');
-    Get.snackbar(
-      "通知",
-      "ログインに成功しました"
-    );
+    Get.snackbar("通知", "ログインに成功しました");
     // ログインしたら、UserCredentialを返す
     return FirebaseAuth.instance.signInWithCredential(credential);
   }
@@ -99,11 +78,8 @@ class AuthController extends GetxController {
       await auth.signOut();
       await _googleSignIn.signOut();
       Get.toNamed('/login');
-      Get.snackbar(
-        "通知",
-        "ログアウトに成功しました",
-        backgroundColor: Colors.green.shade300
-      );
+      Get.snackbar("通知", "ログアウトに成功しました",
+          backgroundColor: Colors.green.shade300);
     } catch (e) {
       Get.defaultDialog(
         title: "エラー",
