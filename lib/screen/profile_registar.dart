@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,8 +16,8 @@ class ProfileRegistarPage extends StatefulWidget {
 class _ProfileRegistarState extends State {
   final AuthController _authController = Get.find();
   final nameControlller = TextEditingController();
-  static const defaultImage =
-      "https://4.bp.blogspot.com/-CtY5GzX0imo/VCIixcXx6PI/AAAAAAAAmfY/AzH9OmbuHZQ/s170/animal_penguin.png";
+  var defaultImage =
+      'images/avatars/' + Random().nextInt(11).toString() + '.png';
   File? _image;
 
   @override
@@ -41,7 +42,7 @@ class _ProfileRegistarState extends State {
                     color: Colors.white,
                   ),
                   child: (_image == null)
-                      ? Image.network(defaultImage)
+                      ? Image.asset(defaultImage)
                       : Image.file(_image!),
                 ),
                 SizedBox(height: 20),
@@ -59,12 +60,25 @@ class _ProfileRegistarState extends State {
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: TextFormField(
                       controller: nameControlller,
+                      maxLength: 10,
                       decoration: InputDecoration(
                           icon: Icon(Icons.account_circle_outlined),
                           labelText: 'ユーザー名'),
                     )),
                 SizedBox(height: 20),
-                Button(buttonText: '登録', onPressed: () {}),
+                Button(
+                    buttonText: '登録',
+                    onPressed: () {
+                      if (nameControlller.text == '')
+                        Get.snackbar("エラー", 'ユーザー名を入力してください',
+                            backgroundColor: Colors.red.shade300);
+                      else {
+                        FocusScope.of(context).unfocus();
+                        Get.toNamed('/');
+                        Get.snackbar("通知", 'プロフィール登録に成功しました',
+                            backgroundColor: Colors.green.shade300);
+                      }
+                    }),
               ])),
         ));
   }
