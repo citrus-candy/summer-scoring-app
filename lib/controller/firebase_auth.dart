@@ -88,4 +88,11 @@ class AuthController extends GetxController {
       );
     }
   }
+
+  Future checkLoginState() async {
+    if (auth.currentUser == null)
+      return false;
+    else
+      return true;
+  }
 }

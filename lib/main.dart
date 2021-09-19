@@ -12,9 +12,14 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  Get.put(AuthController());
+  var _initialRoute = '/login';
+  final _authController = Get.put(AuthController());
+  await _authController
+      .checkLoginState()
+      .then((value) => {if (value) _initialRoute = '/'});
 
-  runApp(GetMaterialApp(title: '夏の赤ペン先生', initialRoute: '/login', getPages: [
+  runApp(
+      GetMaterialApp(title: '夏の赤ペン先生', initialRoute: _initialRoute, getPages: [
     GetPage(name: '/', page: () => TopPage()),
     GetPage(name: '/registar', page: () => ProfileRegistarPage()),
     GetPage(name: '/login', page: () => LoginPage()),
