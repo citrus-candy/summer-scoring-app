@@ -47,7 +47,8 @@ class PointDetailPage extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.fromLTRB(20, 5, 5, 5),
                           color: Colors.orange.shade200,
-                          child: Row(
+                          child: SingleChildScrollView(
+                              child: Row(
                             children: [
                               Container(
                                 width: 50,
@@ -67,7 +68,7 @@ class PointDetailPage extends StatelessWidget {
                                 style: TextStyle(fontSize: 20),
                               )
                             ],
-                          ),
+                          )),
                         ),
                         pointList(context)
                       ])),

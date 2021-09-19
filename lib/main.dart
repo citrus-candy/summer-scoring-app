@@ -14,7 +14,7 @@ Future<void> main() async {
 
   Get.put(AuthController());
 
-  runApp(GetMaterialApp(title: '夏の赤ペン先生', initialRoute: '/', getPages: [
+  runApp(GetMaterialApp(title: '夏の赤ペン先生', initialRoute: '/login', getPages: [
     GetPage(name: '/', page: () => TopPage()),
     GetPage(name: '/registar', page: () => ProfileRegistarPage()),
     GetPage(name: '/login', page: () => LoginPage()),

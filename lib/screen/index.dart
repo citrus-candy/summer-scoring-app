@@ -11,7 +11,9 @@ class TopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+          ),
           body: _navigationController.currentPage,
           bottomNavigationBar: BottomNavigationBar(
               currentIndex: _navigationController.currentIndex.value,
@@ -21,7 +23,7 @@ class TopPage extends StatelessWidget {
                     icon: Icon(Icons.image), label: "マイギャラリー"),
                 BottomNavigationBarItem(icon: Icon(Icons.list), label: "ランキング"),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.account_circle), label: "アカウント")
+                    icon: Icon(Icons.account_circle), label: "マイページ")
               ]),
         ));
   }

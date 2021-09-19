@@ -65,12 +65,6 @@ class _ProfileRegistarState extends State {
                     )),
                 SizedBox(height: 20),
                 Button(buttonText: '登録', onPressed: () {}),
-                SizedBox(height: 40),
-                Button(
-                    buttonText: 'ログアウト',
-                    onPressed: () {
-                      _authController.signOut();
-                    })
               ])),
         ));
   }

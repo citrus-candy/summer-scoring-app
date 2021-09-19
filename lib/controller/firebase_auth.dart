@@ -40,7 +40,7 @@ class AuthController extends GetxController {
       print('Login successful.');
       print('Email : ' + result.user!.displayName.toString());
       print('UserId : ' + result.user!.uid);
-      Get.toNamed('/registar');
+      Get.toNamed('/');
       Get.snackbar("通知", "ログインに成功しました", backgroundColor: Colors.green.shade300);
     } on FirebaseAuthException catch (e) {
       Get.back();

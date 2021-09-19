@@ -79,24 +79,18 @@ class ImageCard extends StatelessWidget {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      if (heroTag == 1)
-                        Text(heroTag.toString() + '位',
-                            style:
-                                TextStyle(fontSize: 30, color: Colors.yellow))
-                      else if (heroTag == 2)
-                        Text(heroTag.toString() + '位',
-                            style: TextStyle(
-                                fontSize: 30, color: Colors.grey.shade300))
-                      else if (heroTag == 3)
-                        Text(heroTag.toString() + '位',
-                            style: TextStyle(
-                                fontSize: 30, color: Colors.brown.shade200))
-                      else
-                        Text(heroTag.toString() + '位',
-                            style:
-                                TextStyle(fontSize: 30, color: Colors.white)),
+                      Text(heroTag.toString() + '位',
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: (heroTag == 1)
+                                  ? Colors.yellow
+                                  : Colors.white)),
                       Text('100点',
-                          style: TextStyle(fontSize: 30, color: Colors.white)),
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: (heroTag == 1)
+                                  ? Colors.yellow
+                                  : Colors.white)),
                     ]),
               ),
       ),
