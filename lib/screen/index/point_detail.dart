@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class GalleryDetailPage extends StatelessWidget {
-  GalleryDetailPage({this.heroTag, this.image});
+class PointDetailPage extends StatelessWidget {
+  PointDetailPage({this.heroTag, this.image});
 
   final heroTag;
   final image;
+  static const defaultImage =
+      "https://4.bp.blogspot.com/-CtY5GzX0imo/VCIixcXx6PI/AAAAAAAAmfY/AzH9OmbuHZQ/s170/animal_penguin.png";
   static const pointDetails = [
     ['ひまわり', '50'],
     ['そら', '30'],
@@ -40,6 +42,31 @@ class GalleryDetailPage extends StatelessWidget {
                               fit: BoxFit.fitHeight,
                               image: NetworkImage(image),
                             ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(20, 5, 5, 5),
+                          color: Colors.orange.shade200,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 50,
+                                height: 50,
+                                margin: EdgeInsets.only(right: 20),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
+                                  color: Colors.white,
+                                ),
+                                child: Image.network(defaultImage),
+                              ),
+                              Text(
+                                'ぺんぎん太郎',
+                                style: TextStyle(fontSize: 20),
+                              )
+                            ],
                           ),
                         ),
                         pointList(context)

@@ -18,7 +18,7 @@ class TopPage extends StatelessWidget {
               onTap: _navigationController.changePage,
               items: [
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.image), label: "ギャラリー"),
+                    icon: Icon(Icons.image), label: "マイギャラリー"),
                 BottomNavigationBarItem(icon: Icon(Icons.list), label: "ランキング"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.account_circle), label: "アカウント")
