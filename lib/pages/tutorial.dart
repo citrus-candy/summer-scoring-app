@@ -13,24 +13,23 @@ class TutorialPage extends StatelessWidget {
       body: OverBoard(
         pages: [
           PageModel.withChild(
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                        height: 200,
-                        child: Lottie.asset(
-                            'assets/animations/image_upload.json',
-                            height: 200)),
-                    Container(
-                      child: Text('画像をアップロードしてください',
-                          style: TextStyle(fontSize: 20, color: Colors.white)),
-                    )
-                  ],
-                ),
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                      height: 200,
+                      child: Lottie.asset('assets/animations/image_upload.json',
+                          height: 200)),
+                  Container(
+                    child: Text('画像をアップロードしてください',
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
+                  )
+                ],
               ),
-              color: Colors.blue,
-              doAnimateChild: true),
+            ),
+            color: Colors.blue,
+          ),
           PageModel.withChild(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
