@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/controller/firebase_auth.dart';
 import '/controller/buttom_navigation_page.dart';
 
 class TopPage extends StatelessWidget {
-  final AuthController _authController = Get.find();
   final _navigationController = Get.put(BottomNavigationPageController());
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
           appBar: AppBar(
-            automaticallyImplyLeading: false,
-          ),
+              automaticallyImplyLeading: false,
+              titleSpacing: 0.0,
+              title:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Image.asset('images/logo.png', fit: BoxFit.contain, height: 60)
+              ])),
           body: _navigationController.currentPage,
           bottomNavigationBar: BottomNavigationBar(
               currentIndex: _navigationController.currentIndex.value,
