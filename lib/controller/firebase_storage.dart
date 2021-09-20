@@ -21,8 +21,8 @@ class StorageController extends GetxController {
           .ref('avatars/' + folderName + '/avatar.png')
           .putFile(file);
       print('RemoteImagePath : ' + result.ref.fullPath);
-      uploadedAvatarUrl.value = result.ref.fullPath;
-      downloadAvatar();
+      uploadedAvatarUrl.value = 'avatars/' + folderName + '/avatar.png';
+      await downloadAvatar();
     } catch (e) {
       print(e);
     }

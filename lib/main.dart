@@ -7,6 +7,8 @@ import 'pages/profile_registar.dart';
 import 'pages/login.dart';
 import 'pages/signup.dart';
 import 'pages/tutorial.dart';
+import 'pages/index/account/change_image.dart';
+import 'pages/index/account/change_name.dart';
 import 'controller/firebase_auth.dart';
 import 'controller/firebase_storage.dart';
 import 'controller/api.dart';
@@ -44,5 +46,7 @@ Future<void> main() async {
         GetPage(name: '/login', page: () => LoginPage()),
         GetPage(name: '/signup', page: () => SignupPage()),
         GetPage(name: '/tutorial', page: () => TutorialPage()),
+        GetPage(name: '/account/image', page: () => ChangeImagePage()),
+        GetPage(name: '/account/name', page: () => ChangeNamePage()),
       ]));
 }

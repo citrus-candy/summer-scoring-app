@@ -77,19 +77,21 @@ class _ProfileRegistarState extends State {
                 SizedBox(height: 20),
                 Button(
                     buttonText: '登録',
-                    onPressed: () {
+                    onPressed: () async {
                       if (nameControlller.text == '')
                         Get.snackbar("エラー", 'ユーザー名を入力してください',
                             backgroundColor: Colors.red.shade300);
                       else {
                         FocusScope.of(context).unfocus();
 
-                        if (pickedImage!.path != '') {
-                          _storageController.uploadAvatar(_image!);
+                        if (pickedImage != null) {
+                          await _storageController.uploadAvatar(_image!);
                         } else {
-                          _storageController.uploadAvatar(File(defaultImage));
+                          await _storageController
+                              .uploadAvatar(File(defaultImage));
                         }
-                        _apiController.postUserInfo(nameControlller.text,
+                        await _apiController.createUserInfo(
+                            nameControlller.text,
                             _storageController.uploadedAvatarUrl.value);
 
                         Get.toNamed('/tutorial', arguments: true);

@@ -50,7 +50,10 @@ class MyPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.change_circle),
                   title: Text('テーマの変更'),
-                  onTap: () {},
+                  onTap: () {
+                    _apiController.createUserInfo(
+                        'test', '/avatar/2VS6/avatar.png');
+                  },
                 ),
                 ListTile(
                   leading: Icon(Icons.quiz),
@@ -71,16 +74,13 @@ class MyPage extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  leading: Icon(Icons.edit),
-                  title: Text('ユーザー名の変更'),
-                  onTap: () {},
-                ),
+                    leading: Icon(Icons.edit),
+                    title: Text('ユーザー名の変更'),
+                    onTap: () => Get.toNamed('/account/name')),
                 ListTile(
                   leading: Icon(Icons.image_outlined),
                   title: Text('プロフィール画像の変更'),
-                  onTap: () {
-                    Get.toNamed('/registar');
-                  },
+                  onTap: () => Get.toNamed('/account/image'),
                 ),
                 ListTile(
                   leading: Icon(Icons.vpn_key),
