@@ -65,13 +65,13 @@ class LoginPage extends StatelessWidget {
                           _authController.signInWithEmailAndPassword(
                               emailControlller.text, passwordControlller.text);
                         }),
-                    SizedBox(height: 20),
-                    Button(
-                        buttonText: 'Googleでログイン',
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          _authController.signInWithGoogle();
-                        }),
+                    // SizedBox(height: 20),
+                    // Button(
+                    //     buttonText: 'Googleでログイン',
+                    //     onPressed: () {
+                    //       FocusScope.of(context).unfocus();
+                    //       _authController.signInWithGoogle();
+                    //     }),
                     Divider(
                       color: Colors.black,
                       height: 50,

@@ -18,14 +18,20 @@ class _SignupPageState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ユーザー登録'),
+        title: Text(
+          'ユーザー登録',
+          style: TextStyle(color: Colors.black),
+        ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         leading: IconButton(
             onPressed: () {
               FocusScope.of(context).unfocus();
               Get.back();
             },
-            icon: Icon(Icons.arrow_back)),
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
       ),
       body: Container(
           color: Theme.of(context).backgroundColor,
