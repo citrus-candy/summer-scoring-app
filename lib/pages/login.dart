@@ -62,8 +62,14 @@ class LoginPage extends StatelessWidget {
                                   child: CircularProgressIndicator(),
                                 );
                               });
-                          _authController.signInWithEmailAndPassword(
-                              emailControlller.text, passwordControlller.text);
+                          _authController
+                              .signInWithEmailAndPassword(emailControlller.text,
+                                  passwordControlller.text)
+                              .then((_) {
+                            Get.toNamed('/');
+                            Get.snackbar("通知", "ログインに成功しました",
+                                backgroundColor: Colors.green.shade300);
+                          });
                         }),
                     // SizedBox(height: 20),
                     // Button(

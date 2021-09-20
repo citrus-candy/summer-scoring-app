@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '/controller/firebase_auth.dart';
+import '/controller/firebase_storage.dart';
+import '/controller/api.dart';
 
 class MyPage extends StatelessWidget {
+  final ApiController _apiController = Get.find();
   final AuthController _authController = Get.find();
-  static const defaultImage =
-      "https://4.bp.blogspot.com/-CtY5GzX0imo/VCIixcXx6PI/AAAAAAAAmfY/AzH9OmbuHZQ/s170/animal_penguin.png";
+  final StorageController _storageController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +18,20 @@ class MyPage extends StatelessWidget {
           child: Column(children: [
             Row(
               children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  margin: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    border: Border.all(color: Colors.black, width: 1),
-                    color: Colors.white,
-                  ),
-                  child: Image.network(defaultImage),
-                ),
+                Obx(() => Container(
+                      width: 100,
+                      height: 100,
+                      margin: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        border: Border.all(color: Colors.black, width: 1),
+                        color: Colors.white,
+                      ),
+                      child: Image.network(
+                          _storageController.downloadedAvatarUrl.value),
+                    )),
                 Text(
-                  'ぺんぎん太郎',
+                  _apiController.userName.value,
                   style: TextStyle(fontSize: 20),
                 )
               ],
@@ -52,7 +55,7 @@ class MyPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.quiz),
                   title: Text('チュートリアルを表示'),
-                  onTap: () => Get.toNamed('/tutorial'),
+                  onTap: () => Get.toNamed('/tutorial', arguments: false),
                 ),
               ],
             ),
@@ -75,7 +78,9 @@ class MyPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.image_outlined),
                   title: Text('プロフィール画像の変更'),
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed('/registar');
+                  },
                 ),
                 ListTile(
                   leading: Icon(Icons.vpn_key),

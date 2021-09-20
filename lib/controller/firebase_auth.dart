@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -8,6 +6,8 @@ import 'package:get/get.dart';
 class AuthController extends GetxController {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  final uid = ''.obs;
+  final idToken = ''.obs;
 
   // メールアドレスとパスワードを使ってユーザー登録
   Future createUserWithEmailAndPassword(String email, String password) async {
@@ -17,10 +17,7 @@ class AuthController extends GetxController {
       print('Create user successful.');
       print('Email : ' + result.user!.email.toString());
       print('UserId : ' + result.user!.uid);
-      Get.back();
-      Get.back();
-      Get.snackbar("通知", "ユーザー登録に成功しました",
-          backgroundColor: Colors.green.shade300);
+      signInWithEmailAndPassword(email, password);
     } on FirebaseAuthException catch (e) {
       Get.back();
       Get.snackbar("エラー", e.message.toString(),
@@ -42,9 +39,11 @@ class AuthController extends GetxController {
       print('Login successful.');
       print('Email : ' + result.user!.email.toString());
       print('UserId : ' + result.user!.uid);
-      await auth.currentUser!.getIdToken().then((value) => print(value));
-      Get.toNamed('/');
-      Get.snackbar("通知", "ログインに成功しました", backgroundColor: Colors.green.shade300);
+      uid.value = result.user!.uid;
+      await auth.currentUser!.getIdToken().then((value) {
+        idToken.value = value;
+        print('idToken : ' + value);
+      });
     } on FirebaseAuthException catch (e) {
       Get.back();
       Get.snackbar("エラー", e.message.toString(),
@@ -95,7 +94,12 @@ class AuthController extends GetxController {
   Future checkLoginState() async {
     if (auth.currentUser == null)
       return false;
-    else
+    else {
+      uid.value = auth.currentUser!.uid;
+      await auth.currentUser!.getIdToken().then((value) {
+        idToken.value = value;
+      });
       return true;
+    }
   }
 }

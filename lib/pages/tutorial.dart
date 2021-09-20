@@ -64,12 +64,12 @@ class TutorialPage extends StatelessWidget {
         showBullets: true,
         skipText: 'スキップ',
         skipCallback: () {
-          Get.back();
+          (Get.arguments) ? Get.toNamed('/') : Get.back();
         },
         nextText: '次へ',
         finishText: '閉じる',
         finishCallback: () {
-          Get.back();
+          (Get.arguments) ? Get.toNamed('/') : Get.back();
         },
       ),
     );

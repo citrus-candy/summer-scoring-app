@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../components/button.dart';
-import '../controller/firebase_auth.dart';
+import '/components/button.dart';
+import '/controller/firebase_storage.dart';
+import '/controller/api.dart';
 
 class ProfileRegistarPage extends StatefulWidget {
   @override
@@ -14,8 +15,11 @@ class ProfileRegistarPage extends StatefulWidget {
 }
 
 class _ProfileRegistarState extends State {
-  final AuthController _authController = Get.find();
   final nameControlller = TextEditingController();
+  final StorageController _storageController = Get.find();
+  final ApiController _apiController = Get.find();
+
+  var pickedImage;
   var defaultImage =
       'assets/images/avatars/' + Random().nextInt(11).toString() + '.png';
   File? _image;
@@ -24,9 +28,9 @@ class _ProfileRegistarState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('プロフィール登録'),
+          title: Text('プロフィール登録', style: TextStyle(color: Colors.black)),
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          automaticallyImplyLeading: false,
+          // automaticallyImplyLeading: false,
         ),
         body: Container(
           color: Theme.of(context).backgroundColor,
@@ -51,11 +55,14 @@ class _ProfileRegistarState extends State {
                 Button(
                     buttonText: '画像のアップロード',
                     onPressed: () async {
-                      final pickedImage = await ImagePicker()
+                      pickedImage = await ImagePicker()
                           .pickImage(source: ImageSource.gallery);
-                      setState(() {
-                        _image = File(pickedImage!.path);
-                      });
+                      if (pickedImage!.path != '') {
+                        setState(() {
+                          _image = File(pickedImage.path);
+                        });
+                        print('LocalImagePath : ' + pickedImage.path);
+                      }
                     }),
                 SizedBox(height: 20),
                 Container(
@@ -76,7 +83,16 @@ class _ProfileRegistarState extends State {
                             backgroundColor: Colors.red.shade300);
                       else {
                         FocusScope.of(context).unfocus();
-                        Get.toNamed('/');
+
+                        if (pickedImage!.path != '') {
+                          _storageController.uploadAvatar(_image!);
+                        } else {
+                          _storageController.uploadAvatar(File(defaultImage));
+                        }
+                        _apiController.postUserInfo(nameControlller.text,
+                            _storageController.uploadedAvatarUrl.value);
+
+                        Get.toNamed('/tutorial', arguments: true);
                         Get.snackbar("通知", 'プロフィール登録に成功しました',
                             backgroundColor: Colors.green.shade300);
                       }

@@ -8,16 +8,22 @@ import 'pages/login.dart';
 import 'pages/signup.dart';
 import 'pages/tutorial.dart';
 import 'controller/firebase_auth.dart';
+import 'controller/firebase_storage.dart';
+import 'controller/api.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
   var _initialRoute = '/login';
+
   final _authController = Get.put(AuthController());
   await _authController
       .checkLoginState()
       .then((value) => {if (value) _initialRoute = '/'});
+
+  Get.put(StorageController());
+  Get.put(ApiController());
 
   runApp(GetMaterialApp(
       title: '夏の赤ペン先生',

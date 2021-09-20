@@ -68,6 +68,7 @@ class _SignupPageState extends State {
                         buttonText: '登録',
                         onPressed: () {
                           FocusScope.of(context).unfocus();
+                          // ローディング画面
                           showGeneralDialog(
                               context: context,
                               barrierDismissible: false,
@@ -80,8 +81,15 @@ class _SignupPageState extends State {
                                   child: CircularProgressIndicator(),
                                 );
                               });
-                          _authController.createUserWithEmailAndPassword(
-                              emailControlller.text, passwordControlller.text);
+                          _authController
+                              .createUserWithEmailAndPassword(
+                                  emailControlller.text,
+                                  passwordControlller.text)
+                              .then((_) {
+                            Get.toNamed('/registar');
+                            Get.snackbar("通知", "ユーザー登録に成功しました",
+                                backgroundColor: Colors.green.shade300);
+                          });
                         })
                   ],
                 )),
