@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../screen/index/mypage.dart';
-import '../screen/index/gallery.dart';
-import '../screen/index/ranking.dart';
+import '/pages/index/mypage.dart';
+import '/pages/index/gallery.dart';
+import '/pages/index/ranking.dart';
 
 class BottomNavigationPageController extends GetxController {
   static BottomNavigationPageController get to => Get.find();

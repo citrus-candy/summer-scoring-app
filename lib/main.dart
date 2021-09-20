@@ -2,10 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'screen/index.dart';
-import 'screen/profile_registar.dart';
-import 'screen/login.dart';
-import 'screen/signup.dart';
+import 'pages/index.dart';
+import 'pages/profile_registar.dart';
+import 'pages/login.dart';
+import 'pages/signup.dart';
 import 'controller/firebase_auth.dart';
 
 Future<void> main() async {

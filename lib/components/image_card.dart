@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../screen/index/point_detail.dart';
+import '/pages/index/point_detail.dart';
 
 class ImageCard extends StatelessWidget {
   ImageCard({required this.heroTag, required this.isGallery});
