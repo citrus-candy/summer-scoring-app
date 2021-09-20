@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 import 'package:http/http.dart';
 
 import 'firebase_auth.dart';
+import 'firebase_storage.dart';
 
 class ApiController extends GetxController {
   final AuthController _authController = Get.find();
+  final StorageController _storageController = Get.find();
 
   final userName = 'ぺんぎん太郎'.obs;
 
@@ -43,10 +45,33 @@ class ApiController extends GetxController {
             'Authorization': 'Bearer ' + _authController.idToken.value,
             'Content-Type': 'application/json'
           },
-          body: jsonEncode(body));
+          body: utf8.encode(jsonEncode(body)));
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
       if (name != null) userName.value = name;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future getUserInfo(String token) async {
+    try {
+      var url = Uri.parse(baseUrl + '/api/v1/users/me');
+      await get(
+        url,
+        headers: {
+          'accept': 'application/json',
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        },
+      ).then((response) {
+        print('Response status: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        var result = jsonDecode(utf8.decode(response.bodyBytes));
+        print(result);
+        userName.value = result['name'];
+        _storageController.downloadAvatar();
+      });
     } catch (e) {
       print(e);
     }

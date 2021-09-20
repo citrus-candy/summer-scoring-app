@@ -85,7 +85,8 @@ class MyPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.vpn_key),
                   title: Text('パスワードの変更'),
-                  onTap: () {},
+                  onTap: () =>
+                      _apiController.getUserInfo(_authController.idToken.value),
                 ),
                 ListTile(
                   leading: Icon(Icons.logout),

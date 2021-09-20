@@ -78,7 +78,9 @@ class AuthController extends GetxController {
   Future signOut() async {
     try {
       await auth.signOut();
-      await _googleSignIn.signOut();
+      // await _googleSignIn.signOut();
+      uid.value = '';
+      idToken.value = '';
       Get.toNamed('/login');
       Get.snackbar("通知", "ログアウトに成功しました",
           backgroundColor: Colors.green.shade300);

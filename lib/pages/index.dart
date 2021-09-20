@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '/controller/api.dart';
+import '/controller/firebase_auth.dart';
 import '/controller/buttom_navigation_page.dart';
 
-class TopPage extends StatelessWidget {
+class TopPage extends StatefulWidget {
+  @override
+  _TopPageState createState() => _TopPageState();
+}
+
+class _TopPageState extends State {
   final _navigationController = Get.put(BottomNavigationPageController());
+  final ApiController _apiController = Get.find();
+  final AuthController _authController = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+    _apiController.getUserInfo(_authController.idToken.value);
+  }
 
   @override
   Widget build(BuildContext context) {
