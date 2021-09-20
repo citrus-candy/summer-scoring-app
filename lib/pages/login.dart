@@ -11,6 +11,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    emailControlller.text = 'hogefuga@fuga.com';
+    passwordControlller.text = 'hogefuga';
+
     return Scaffold(
       body: Container(
           alignment: Alignment.center,

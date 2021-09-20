@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -13,7 +15,7 @@ class AuthController extends GetxController {
       UserCredential result = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       print('Create user successful.');
-      print('Email : ' + result.user!.displayName.toString());
+      print('Email : ' + result.user!.email.toString());
       print('UserId : ' + result.user!.uid);
       Get.back();
       Get.back();
@@ -38,8 +40,9 @@ class AuthController extends GetxController {
       UserCredential result = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       print('Login successful.');
-      print('Email : ' + result.user!.displayName.toString());
+      print('Email : ' + result.user!.email.toString());
       print('UserId : ' + result.user!.uid);
+      await auth.currentUser!.getIdToken().then((value) => print(value));
       Get.toNamed('/');
       Get.snackbar("通知", "ログインに成功しました", backgroundColor: Colors.green.shade300);
     } on FirebaseAuthException catch (e) {
