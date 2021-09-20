@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '/components/image_card.dart';
 
@@ -6,6 +7,7 @@ class RankingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Theme.of(context).backgroundColor,
       padding: EdgeInsets.all(2),
       child: GridView.count(
           crossAxisCount: 1,

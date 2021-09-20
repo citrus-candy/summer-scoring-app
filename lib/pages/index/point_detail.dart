@@ -46,7 +46,7 @@ class PointDetailPage extends StatelessWidget {
                         ),
                         Container(
                           padding: EdgeInsets.fromLTRB(20, 5, 5, 5),
-                          color: Colors.orange.shade200,
+                          color: Theme.of(context).primaryColor,
                           child: SingleChildScrollView(
                               child: Row(
                             children: [
@@ -119,7 +119,7 @@ class PointDetailPage extends StatelessWidget {
             BoxConstraints(minHeight: MediaQuery.of(context).size.height / 2),
         child: DataTable(
           headingRowColor: MaterialStateColor.resolveWith(
-              (states) => Colors.orange.shade100),
+              (states) => Theme.of(context).shadowColor),
           columns: [
             DataColumn(label: Text('単語')),
             DataColumn(label: Text('点数')),

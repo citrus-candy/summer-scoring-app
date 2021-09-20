@@ -19,6 +19,7 @@ class _SignupPageState extends State {
     return Scaffold(
       appBar: AppBar(
         title: Text('ユーザー登録'),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         leading: IconButton(
             onPressed: () {
               FocusScope.of(context).unfocus();
@@ -27,6 +28,7 @@ class _SignupPageState extends State {
             icon: Icon(Icons.arrow_back)),
       ),
       body: Container(
+          color: Theme.of(context).backgroundColor,
           alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(

@@ -18,11 +18,23 @@ Future<void> main() async {
       .checkLoginState()
       .then((value) => {if (value) _initialRoute = '/'});
 
-  runApp(
-      GetMaterialApp(title: '夏の赤ペン先生', initialRoute: _initialRoute, getPages: [
-    GetPage(name: '/', page: () => TopPage()),
-    GetPage(name: '/registar', page: () => ProfileRegistarPage()),
-    GetPage(name: '/login', page: () => LoginPage()),
-    GetPage(name: '/signup', page: () => SignupPage()),
-  ]));
+  runApp(GetMaterialApp(
+      title: '夏の赤ペン先生',
+      theme: ThemeData(
+          primaryColor: Colors.cyan.shade100,
+          shadowColor: Colors.cyan.shade50,
+          backgroundColor: Colors.cyan.shade50,
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.cyan.shade100,
+          ),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              backgroundColor: Colors.cyan.shade100,
+              selectedItemColor: Colors.cyanAccent.shade700)),
+      initialRoute: _initialRoute,
+      getPages: [
+        GetPage(name: '/', page: () => TopPage()),
+        GetPage(name: '/registar', page: () => ProfileRegistarPage()),
+        GetPage(name: '/login', page: () => LoginPage()),
+        GetPage(name: '/signup', page: () => SignupPage()),
+      ]));
 }

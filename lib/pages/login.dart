@@ -16,6 +16,7 @@ class LoginPage extends StatelessWidget {
 
     return Scaffold(
       body: Container(
+          color: Theme.of(context).backgroundColor,
           alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(

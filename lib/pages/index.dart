@@ -11,6 +11,7 @@ class TopPage extends StatelessWidget {
     return Obx(() => Scaffold(
           appBar: AppBar(
               automaticallyImplyLeading: false,
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
               titleSpacing: 0.0,
               title:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -18,6 +19,10 @@ class TopPage extends StatelessWidget {
               ])),
           body: _navigationController.currentPage,
           bottomNavigationBar: BottomNavigationBar(
+              backgroundColor:
+                  Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+              selectedItemColor:
+                  Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
               currentIndex: _navigationController.currentIndex.value,
               onTap: _navigationController.changePage,
               items: [

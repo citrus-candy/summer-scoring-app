@@ -25,9 +25,11 @@ class _ProfileRegistarState extends State {
     return Scaffold(
         appBar: AppBar(
           title: Text('プロフィール登録'),
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           automaticallyImplyLeading: false,
         ),
         body: Container(
+          color: Theme.of(context).backgroundColor,
           alignment: Alignment.center,
           child: SingleChildScrollView(
               child: Column(
