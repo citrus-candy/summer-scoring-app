@@ -32,6 +32,11 @@ dependencies:
   firebase_auth: ^3.1.1
   google_sign_in: ^5.1.0
   image_picker: ^0.8.4
+  flutter_native_splash: ^1.2.3
+
+flutter_native_splash:
+  image: 'images/logo_splash.png'
+  color: '#99e6ff'
 
 dev_dependencies:
   flutter_test:
