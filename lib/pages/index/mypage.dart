@@ -11,79 +11,104 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).backgroundColor,
-      child: Column(children: [
-        Row(
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              margin: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                border: Border.all(color: Colors.black, width: 1),
-                color: Colors.white,
-              ),
-              child: Image.network(defaultImage),
+        color: Theme.of(context).backgroundColor,
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Row(
+              children: [
+                Container(
+                  width: 100,
+                  height: 100,
+                  margin: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(color: Colors.black, width: 1),
+                    color: Colors.white,
+                  ),
+                  child: Image.network(defaultImage),
+                ),
+                Text(
+                  'ぺんぎん太郎',
+                  style: TextStyle(fontSize: 20),
+                )
+              ],
             ),
-            Text(
-              'ぺんぎん太郎',
-              style: TextStyle(fontSize: 20),
-            )
-          ],
-        ),
-        Divider(color: Colors.black),
-        ListView(
-          shrinkWrap: true,
-          children: [
-            ListTile(
-              title: Text(
-                'アカウント',
-                style: TextStyle(color: Colors.black54),
-              ),
+            Divider(color: Colors.black),
+            ListView(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                ListTile(
+                  title: Text(
+                    'アプリ',
+                    style: TextStyle(color: Colors.black54),
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.change_circle),
+                  title: Text('テーマの変更'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(Icons.quiz),
+                  title: Text('チュートリアルを表示'),
+                  onTap: () => Get.toNamed('/tutorial'),
+                ),
+              ],
             ),
-            ListTile(
-              leading: Icon(Icons.edit),
-              title: Text('ユーザー名の変更'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.image_outlined),
-              title: Text('プロフィール画像の変更'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.vpn_key),
-              title: Text('パスワードの変更'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('ログアウト'),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (_) {
-                    return AlertDialog(
-                      content: Text("ログアウトしますか？"),
-                      actions: <Widget>[
-                        TextButton(
-                          child: Text("はい"),
-                          onPressed: () => _authController.signOut(),
-                        ),
-                        TextButton(
-                          child: Text("いいえ"),
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ],
+            Divider(color: Colors.black),
+            ListView(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                ListTile(
+                  title: Text(
+                    'アカウント',
+                    style: TextStyle(color: Colors.black54),
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.edit),
+                  title: Text('ユーザー名の変更'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(Icons.image_outlined),
+                  title: Text('プロフィール画像の変更'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(Icons.vpn_key),
+                  title: Text('パスワードの変更'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text('ログアウト'),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) {
+                        return AlertDialog(
+                          content: Text("ログアウトしますか？"),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text("はい"),
+                              onPressed: () => _authController.signOut(),
+                            ),
+                            TextButton(
+                              child: Text("いいえ"),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ],
+                        );
+                      },
                     );
                   },
-                );
-              },
+                )
+              ],
             )
-          ],
-        )
-      ]),
-    );
+          ]),
+        ));
   }
 }

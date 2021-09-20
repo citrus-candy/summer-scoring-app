@@ -13,10 +13,12 @@ class TopPage extends StatelessWidget {
               automaticallyImplyLeading: false,
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
               titleSpacing: 0.0,
-              title:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Image.asset('images/logo.png', fit: BoxFit.contain, height: 60)
-              ])),
+              title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/logo.png',
+                        fit: BoxFit.contain, height: 60)
+                  ])),
           body: _navigationController.currentPage,
           bottomNavigationBar: BottomNavigationBar(
               backgroundColor:

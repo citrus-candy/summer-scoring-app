@@ -17,7 +17,7 @@ class _ProfileRegistarState extends State {
   final AuthController _authController = Get.find();
   final nameControlller = TextEditingController();
   var defaultImage =
-      'images/avatars/' + Random().nextInt(11).toString() + '.png';
+      'assets/images/avatars/' + Random().nextInt(11).toString() + '.png';
   File? _image;
 
   @override
