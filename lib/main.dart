@@ -7,6 +7,7 @@ import 'pages/profile_registar.dart';
 import 'pages/login.dart';
 import 'pages/signup.dart';
 import 'pages/tutorial.dart';
+import 'pages/index/scoring.dart';
 import 'pages/index/account/change_image.dart';
 import 'pages/index/account/change_name.dart';
 import 'controller/firebase_auth.dart';
@@ -24,8 +25,8 @@ Future<void> main() async {
       .checkLoginState()
       .then((value) => {if (value) _initialRoute = '/'});
 
-  Get.put(StorageController());
-  Get.put(ApiController());
+  Get.lazyPut(() => ApiController());
+  Get.lazyPut(() => StorageController());
 
   runApp(GetMaterialApp(
       title: '夏の赤ペン先生',
@@ -42,6 +43,7 @@ Future<void> main() async {
       initialRoute: _initialRoute,
       getPages: [
         GetPage(name: '/', page: () => TopPage()),
+        GetPage(name: '/scoring', page: () => ScoringPage()),
         GetPage(name: '/registar', page: () => ProfileRegistarPage()),
         GetPage(name: '/login', page: () => LoginPage()),
         GetPage(name: '/signup', page: () => SignupPage()),

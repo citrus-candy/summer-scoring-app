@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 
@@ -8,9 +9,9 @@ import 'firebase_storage.dart';
 
 class ApiController extends GetxController {
   final AuthController _authController = Get.find();
-  final StorageController _storageController = Get.find();
 
-  final userName = 'ぺんぎん太郎'.obs;
+  final userName = ''.obs;
+  final imagePoint = 0.0.obs;
 
   static const baseUrl = 'http://spino.pigeons.house';
 
@@ -55,6 +56,8 @@ class ApiController extends GetxController {
   }
 
   Future getUserInfo(String token) async {
+    final StorageController _storageController = Get.find();
+
     try {
       var url = Uri.parse(baseUrl + '/api/v1/users/me');
       await get(
@@ -74,6 +77,35 @@ class ApiController extends GetxController {
       });
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future postScoringImage(String postUrl) async {
+    try {
+      var url = Uri.parse(baseUrl + '/api/v1/scoring');
+      var body = {
+        'image_url': 'gs://summer-scoring-app.appspot.com/' + postUrl
+      };
+      await post(url,
+              headers: {
+                'accept': 'application/json',
+                'Authorization': 'Bearer ' + _authController.idToken.value,
+                'Content-Type': 'application/json'
+              },
+              body: jsonEncode(body))
+          .then((response) {
+        print('Response status: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        var result = jsonDecode(utf8.decode(response.bodyBytes));
+        print(result);
+        var point = result['point'];
+        imagePoint.value = point * point / 10000;
+      });
+    } catch (e) {
+      print(e);
+
+      Get.back();
+      Get.snackbar("エラー", '採点に失敗しました', backgroundColor: Colors.red.shade300);
     }
   }
 }

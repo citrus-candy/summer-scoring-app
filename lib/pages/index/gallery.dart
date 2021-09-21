@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '/components/image_card.dart';
 
@@ -28,7 +29,7 @@ class GalleryPage extends StatelessWidget {
                 child: ElevatedButton.icon(
                   icon: Icon(Icons.add),
                   label: Text('採点する'),
-                  onPressed: () {},
+                  onPressed: () => Get.toNamed('/scoring'),
                 ))
           ],
         ));
