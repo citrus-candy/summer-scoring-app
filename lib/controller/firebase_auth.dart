@@ -17,7 +17,6 @@ class AuthController extends GetxController {
       print('Create user successful.');
       print('Email : ' + result.user!.email.toString());
       print('UserId : ' + result.user!.uid);
-      await signInWithEmailAndPassword(email, password);
     } on FirebaseAuthException catch (e) {
       Get.back();
       Get.snackbar("エラー", e.message.toString(),

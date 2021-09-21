@@ -72,9 +72,10 @@ class _SignupPageState extends State {
                           FocusScope.of(context).unfocus();
                           // ローディング画面
                           _loadingDialog.show(context);
+                          _authController.createUserWithEmailAndPassword(
+                              emailControlller.text, passwordControlller.text);
                           _authController
-                              .createUserWithEmailAndPassword(
-                                  emailControlller.text,
+                              .signInWithEmailAndPassword(emailControlller.text,
                                   passwordControlller.text)
                               .then((_) {
                             Get.toNamed('/registar');
