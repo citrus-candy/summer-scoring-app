@@ -13,18 +13,20 @@ class RankingPage extends StatelessWidget {
     return Container(
       color: Theme.of(context).backgroundColor,
       padding: EdgeInsets.all(2),
-      child: Obx(() => GridView.count(
+      child: Obx(() => (_apiController.myPosts.length != 0)
+          ? GridView.count(
               crossAxisCount: 1,
               crossAxisSpacing: 10.0,
               mainAxisSpacing: 10.0,
               childAspectRatio: 3.0,
               children: [
-                for (var i = 0; i < _apiController.rankingPosts.length; i++)
-                  ImageCard(
-                      heroTag: (i + 1).toString(),
-                      isGallery: false,
-                      contents: _apiController.rankingPosts[i])
-              ])),
+                  for (var i = 0; i < _apiController.rankingPosts.length; i++)
+                    ImageCard(
+                        heroTag: (i + 1).toString(),
+                        isGallery: false,
+                        contents: _apiController.rankingPosts[i])
+                ])
+          : Center(child: Text('画像がありません', style: TextStyle(fontSize: 20)))),
     );
   }
 }

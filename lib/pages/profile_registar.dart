@@ -28,7 +28,7 @@ class _ProfileRegistarState extends State {
         appBar: AppBar(
           title: Text('プロフィール登録', style: TextStyle(color: Colors.black)),
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          // automaticallyImplyLeading: false,
+          automaticallyImplyLeading: false,
         ),
         body: Container(
           color: Theme.of(context).backgroundColor,

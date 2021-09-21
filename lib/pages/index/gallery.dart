@@ -15,17 +15,20 @@ class GalleryPage extends StatelessWidget {
         padding: EdgeInsets.all(2),
         child: Stack(
           children: [
-            Obx(() => GridView.count(
+            Obx(() => (_apiController.myPosts.length != 0)
+                ? GridView.count(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10.0,
                     mainAxisSpacing: 10.0,
                     children: [
-                      for (var i = 0; i < _apiController.myPosts.length; i++)
-                        ImageCard(
-                            heroTag: (i + 1).toString(),
-                            isGallery: true,
-                            contents: _apiController.myPosts[i])
-                    ])),
+                        for (var i = 0; i < _apiController.myPosts.length; i++)
+                          ImageCard(
+                              heroTag: (i + 1).toString(),
+                              isGallery: true,
+                              contents: _apiController.myPosts[i])
+                      ])
+                : Center(
+                    child: Text('画像がありません', style: TextStyle(fontSize: 20)))),
             Positioned(
                 right: 20,
                 bottom: 20,

@@ -45,7 +45,6 @@ class _TopPageState extends State {
               future: getData(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  _loadingDialog.close();
                   return _navigationController.currentPage;
                 } else {
                   return Center(child: CircularProgressIndicator());
