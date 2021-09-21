@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '/controller/api.dart';
+import '/controller/firebase_auth.dart';
 import '/pages/index/point_detail.dart';
 import '/components/button.dart';
 
@@ -10,6 +11,7 @@ class Result extends StatelessWidget {
   static const defaultImage =
       'https://3.bp.blogspot.com/-3zXHhK4EsCc/XLAcx0NOeQI/AAAAAAABSS4/hwoF9buOEJwyh9aE-yMfVSpChdNe9EXQACLcBGAs/s600/bg_himawari_hatake.jpg';
   final ApiController _apiController = Get.find();
+  final AuthController _authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,13 @@ class Result extends StatelessWidget {
                     onPressed: () => Get.to(PointDetailPage(
                         heroTag: 'heroTag', image: defaultImage))),
                 SizedBox(height: 30),
-                Button(buttonText: '閉じる', onPressed: () => Get.back()),
+                Button(
+                    buttonText: '閉じる',
+                    onPressed: () {
+                      Get.back();
+                      _apiController
+                          .getMyGallery(_authController.idToken.value);
+                    }),
               ],
             ),
           ],

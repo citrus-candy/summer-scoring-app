@@ -14,9 +14,7 @@ class StorageController extends GetxController {
   final FirebaseStorage storage = FirebaseStorage.instance;
 
   var uploadedAvatarUrl = ''.obs;
-  var downloadedAvatarUrl =
-      'https://4.bp.blogspot.com/-CtY5GzX0imo/VCIixcXx6PI/AAAAAAAAmfY/AzH9OmbuHZQ/s170/animal_penguin.png'
-          .obs;
+  var downloadedAvatarUrl = ''.obs;
 
   Future uploadAvatar(File file) async {
     try {
@@ -60,6 +58,11 @@ class StorageController extends GetxController {
       Get.snackbar("エラー", '画像のアップロードに失敗しました',
           backgroundColor: Colors.red.shade300);
     }
+  }
+
+  Future downloadScoringImage(String path) async {
+    var url = await storage.ref(path).getDownloadURL();
+    return url;
   }
 
   String randomString(int length) {

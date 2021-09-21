@@ -17,17 +17,16 @@ class _TopPageState extends State {
   final ApiController _apiController = Get.find();
   final AuthController _authController = Get.find();
 
-  @override
-  void initState() {
-    super.initState();
-    _apiController.getUserInfo(_authController.idToken.value);
-  }
+  Future getData() async {
+    final token = _authController.idToken.value;
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   _loadingDialog.show(context);
-  // }
+    if (_navigationController.currentIndex.value == 0)
+      await _apiController.getMyGallery(token);
+    else if (_navigationController.currentIndex.value == 1)
+      await _apiController.getRanking(token);
+    else
+      await _apiController.getUserInfo(token);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,16 @@ class _TopPageState extends State {
                     Image.asset('assets/images/logo.png',
                         fit: BoxFit.contain, height: 60)
                   ])),
-          body: _navigationController.currentPage,
+          body: FutureBuilder(
+              future: getData(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  _loadingDialog.close();
+                  return _navigationController.currentPage;
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              }),
           bottomNavigationBar: BottomNavigationBar(
               backgroundColor:
                   Theme.of(context).bottomNavigationBarTheme.backgroundColor,

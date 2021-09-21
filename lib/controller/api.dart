@@ -12,9 +12,12 @@ class ApiController extends GetxController {
 
   final userName = ''.obs;
   final imagePoint = 0.0.obs;
+  final myPosts = [].obs;
+  final rankingPosts = [].obs;
 
   static const baseUrl = 'http://spino.pigeons.house';
 
+  // プロフィールの登録
   Future createUserInfo(String name, String image) async {
     try {
       var url = Uri.parse(baseUrl + '/api/v1/signup');
@@ -34,6 +37,7 @@ class ApiController extends GetxController {
     }
   }
 
+  // プロフィールの変更
   Future changeUserInfo(String? name, String? image) async {
     try {
       var url = Uri.parse(baseUrl + '/api/v1/signup');
@@ -55,6 +59,7 @@ class ApiController extends GetxController {
     }
   }
 
+  // ユーザー情報の取得
   Future getUserInfo(String token) async {
     final StorageController _storageController = Get.find();
 
@@ -80,6 +85,7 @@ class ApiController extends GetxController {
     }
   }
 
+  // 画像の投稿
   Future postScoringImage(String postUrl) async {
     try {
       var url = Uri.parse(baseUrl + '/api/v1/scoring');
@@ -103,9 +109,56 @@ class ApiController extends GetxController {
       });
     } catch (e) {
       print(e);
-
       Get.back();
       Get.snackbar("エラー", '採点に失敗しました', backgroundColor: Colors.red.shade300);
+    }
+  }
+
+  // マイギャラリーの取得
+  Future getMyGallery(String token) async {
+    try {
+      var url = Uri.parse(baseUrl + '/api/v1/posts/me');
+      await get(
+        url,
+        headers: {
+          'accept': 'application/json',
+          'Authorization': 'Bearer ' + token,
+        },
+      ).then((response) {
+        print('Response status: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        var result = jsonDecode(utf8.decode(response.bodyBytes));
+        print(result);
+        myPosts.value = result;
+      });
+    } catch (e) {
+      print(e);
+      Get.snackbar("エラー", 'ギャラリーの取得に失敗しました',
+          backgroundColor: Colors.red.shade300);
+    }
+  }
+
+  // ランキングの取得
+  Future getRanking(String token) async {
+    try {
+      var url = Uri.parse(baseUrl + '/api/v1/ranking/posts?limit=10');
+      await get(
+        url,
+        headers: {
+          'accept': 'application/json',
+          'Authorization': 'Bearer ' + token,
+        },
+      ).then((response) {
+        print('Response status: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        var result = jsonDecode(utf8.decode(response.bodyBytes));
+        print(result);
+        rankingPosts.value = result;
+      });
+    } catch (e) {
+      print(e);
+      Get.snackbar("エラー", 'ランキングの取得に失敗しました',
+          backgroundColor: Colors.red.shade300);
     }
   }
 }
