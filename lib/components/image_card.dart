@@ -46,7 +46,10 @@ class ImageCard extends StatelessWidget {
                           onTap: () {
                             _hasPadding.value = false;
                             Get.to(PointDetailPage(
-                                heroTag: heroTag, image: downloadUrl));
+                                heroTag: heroTag,
+                                image: downloadUrl,
+                                userName: userName,
+                                userImage: userImage));
                           },
                           onTapCancel: () {
                             _hasPadding.value = false;
@@ -64,7 +67,6 @@ class ImageCard extends StatelessWidget {
   Future downloadImage(storageUrl) async {
     await _storageController.downloadScoringImage(storageUrl).then((value) {
       downloadUrl = value;
-      // print('url:' + value);
     });
   }
 

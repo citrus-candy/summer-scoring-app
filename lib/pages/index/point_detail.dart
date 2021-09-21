@@ -2,11 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PointDetailPage extends StatelessWidget {
-  PointDetailPage({this.heroTag, this.image});
+import '/controller/firebase_storage.dart';
 
+class PointDetailPage extends StatelessWidget {
+  PointDetailPage({this.heroTag, this.image, this.userName, this.userImage});
+
+  final StorageController _storageController = Get.find();
   final heroTag;
   final image;
+  final userName;
+  final userImage;
+  var downloadUrl;
   static const defaultImage =
       "https://4.bp.blogspot.com/-CtY5GzX0imo/VCIixcXx6PI/AAAAAAAAmfY/AzH9OmbuHZQ/s170/animal_penguin.png";
   static const pointDetails = [
@@ -50,21 +56,41 @@ class PointDetailPage extends StatelessWidget {
                           child: SingleChildScrollView(
                               child: Row(
                             children: [
-                              Container(
-                                width: 50,
-                                height: 50,
-                                margin: EdgeInsets.only(right: 20),
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  border:
-                                      Border.all(color: Colors.black, width: 1),
-                                  color: Colors.white,
-                                ),
-                                child: Image.network(defaultImage),
-                              ),
+                              FutureBuilder(
+                                  future: downloadImage(userImage),
+                                  builder: (_, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      return Container(
+                                        width: 50,
+                                        height: 50,
+                                        margin: EdgeInsets.only(right: 20),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          border: Border.all(
+                                              color: Colors.black, width: 1),
+                                          color: Colors.white,
+                                        ),
+                                        child: Image.network(downloadUrl),
+                                      );
+                                    } else {
+                                      return Container(
+                                        width: 50,
+                                        height: 50,
+                                        margin: EdgeInsets.only(right: 20),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          border: Border.all(
+                                              color: Colors.black, width: 1),
+                                          color: Colors.white,
+                                        ),
+                                      );
+                                    }
+                                  }),
                               Text(
-                                'ぺんぎん太郎',
+                                userName,
                                 style: TextStyle(fontSize: 20),
                               )
                             ],
@@ -76,6 +102,12 @@ class PointDetailPage extends StatelessWidget {
                 ]),
               ))),
     );
+  }
+
+  Future downloadImage(storageUrl) async {
+    await _storageController.downloadScoringImage(storageUrl).then((value) {
+      downloadUrl = value;
+    });
   }
 
   Widget closeButton() {
