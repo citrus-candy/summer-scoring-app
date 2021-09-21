@@ -24,7 +24,7 @@ class _SignupPageState extends State {
           'ユーザー登録',
           style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: Get.theme.appBarTheme.backgroundColor,
         leading: IconButton(
             onPressed: () {
               FocusScope.of(context).unfocus();
@@ -36,7 +36,7 @@ class _SignupPageState extends State {
             )),
       ),
       body: Container(
-          color: Theme.of(context).backgroundColor,
+          color: Get.theme.backgroundColor,
           alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(

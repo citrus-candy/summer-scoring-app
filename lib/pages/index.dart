@@ -13,7 +13,6 @@ class TopPage extends StatefulWidget {
 
 class _TopPageState extends State {
   final _navigationController = Get.put(BottomNavigationPageController());
-  final _loadingDialog = LoadingDialog();
   final ApiController _apiController = Get.find();
   final AuthController _authController = Get.find();
 
@@ -33,7 +32,7 @@ class _TopPageState extends State {
     return Obx(() => Scaffold(
           appBar: AppBar(
               automaticallyImplyLeading: false,
-              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+              backgroundColor: Get.theme.appBarTheme.backgroundColor,
               titleSpacing: 0.0,
               title: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -52,9 +51,9 @@ class _TopPageState extends State {
               }),
           bottomNavigationBar: BottomNavigationBar(
               backgroundColor:
-                  Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+                  Get.theme.bottomNavigationBarTheme.backgroundColor,
               selectedItemColor:
-                  Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+                  Get.theme.bottomNavigationBarTheme.selectedItemColor,
               currentIndex: _navigationController.currentIndex.value,
               onTap: _navigationController.changePage,
               items: [

@@ -37,6 +37,7 @@ dependencies:
   flutter_overboard: ^2.0.1
   lottie: ^1.2.0
   http: ^0.13.3
+  shared_preferences: ^2.0.8
 
 flutter_native_splash:
   image: 'assets/images/logo_splash.png'

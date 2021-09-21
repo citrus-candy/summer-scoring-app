@@ -13,7 +13,7 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Theme.of(context).backgroundColor,
+        color: Get.theme.backgroundColor,
         child: SingleChildScrollView(
           child: Column(children: [
             Row(
@@ -50,7 +50,7 @@ class MyPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.change_circle),
                   title: Text('テーマの変更'),
-                  onTap: () {},
+                  onTap: () => Get.toNamed('/account/theme'),
                 ),
                 ListTile(
                   leading: Icon(Icons.quiz),
@@ -79,12 +79,12 @@ class MyPage extends StatelessWidget {
                   title: Text('プロフィール画像の変更'),
                   onTap: () => Get.toNamed('/account/image'),
                 ),
-                ListTile(
-                  leading: Icon(Icons.vpn_key),
-                  title: Text('パスワードの変更'),
-                  onTap: () =>
-                      _apiController.getUserInfo(_authController.idToken.value),
-                ),
+                // ListTile(
+                //   leading: Icon(Icons.vpn_key),
+                //   title: Text('パスワードの変更'),
+                //   onTap: () =>
+                //       _apiController.getUserInfo(_authController.idToken.value),
+                // ),
                 ListTile(
                   leading: Icon(Icons.logout),
                   title: Text('ログアウト'),

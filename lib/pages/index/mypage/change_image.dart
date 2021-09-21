@@ -29,7 +29,7 @@ class _ChangeImagePageState extends State {
             'ユーザー名の変更',
             style: TextStyle(color: Colors.black),
           ),
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          backgroundColor: Get.theme.appBarTheme.backgroundColor,
           leading: IconButton(
               onPressed: () {
                 FocusScope.of(context).unfocus();
@@ -41,7 +41,7 @@ class _ChangeImagePageState extends State {
               )),
         ),
         body: Container(
-          color: Theme.of(context).backgroundColor,
+          color: Get.theme.backgroundColor,
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class NowScoring extends StatefulWidget {
@@ -20,7 +21,7 @@ class _NowScoringState extends State {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Theme.of(context).backgroundColor,
+        color: Get.theme.backgroundColor,
         alignment: Alignment.center,
         child: Column(
           children: [

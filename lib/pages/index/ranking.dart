@@ -11,7 +11,7 @@ class RankingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).backgroundColor,
+      color: Get.theme.backgroundColor,
       padding: EdgeInsets.all(2),
       child: Obx(() => (_apiController.myPosts.length != 0)
           ? GridView.count(

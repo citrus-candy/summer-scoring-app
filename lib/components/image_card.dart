@@ -18,7 +18,7 @@ class ImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double point = contents['point'];
+    final int point = contents['point'];
     String url = contents['image_url'];
     final String userName = contents['user']['name'];
     final String userImage = contents['user']['img'];
@@ -68,7 +68,7 @@ class ImageCard extends StatelessWidget {
     });
   }
 
-  Widget _imageCard(String heroTag, double point, String url) {
+  Widget _imageCard(String heroTag, int point, String url) {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       elevation: 5,
@@ -100,7 +100,7 @@ class ImageCard extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.only(bottom: 10),
-                      child: Text(point.toInt().toString() + '点',
+                      child: Text(point.toString() + '点',
                           style: TextStyle(fontSize: 20, color: Colors.white)),
                     ),
                   ],
@@ -116,7 +116,7 @@ class ImageCard extends StatelessWidget {
                               color: (heroTag == '1')
                                   ? Colors.yellow
                                   : Colors.white)),
-                      Text(point.toInt().toString() + '点',
+                      Text(point.toString() + '点',
                           style: TextStyle(
                               fontSize: 30,
                               color: (heroTag == '1')

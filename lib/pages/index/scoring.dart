@@ -26,7 +26,7 @@ class _ScoringPageState extends State {
             '',
             style: TextStyle(color: Colors.black),
           ),
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          backgroundColor: Get.theme.appBarTheme.backgroundColor,
           automaticallyImplyLeading: (pageCount == 0.3) ? true : false,
           leading: IconButton(
               onPressed: () {
