@@ -27,8 +27,11 @@ class MyPage extends StatelessWidget {
                         border: Border.all(color: Colors.black, width: 1),
                         color: Colors.white,
                       ),
-                      child: Image.network(
-                          _storageController.downloadedAvatarUrl.value),
+                      child:
+                          (_storageController.downloadedAvatarUrl.value != '')
+                              ? Image.network(
+                                  _storageController.downloadedAvatarUrl.value)
+                              : CircularProgressIndicator(),
                     )),
                 Text(
                   _apiController.userName.value,
