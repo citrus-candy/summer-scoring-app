@@ -13,7 +13,7 @@ class RankingPage extends StatelessWidget {
     return Container(
       color: Get.theme.backgroundColor,
       padding: EdgeInsets.all(2),
-      child: Obx(() => (_apiController.myPosts.length != 0)
+      child: Obx(() => (_apiController.rankingPosts.length != 0)
           ? GridView.count(
               crossAxisCount: 1,
               crossAxisSpacing: 10.0,
