@@ -30,8 +30,7 @@ class Result extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Container(
-                  child: Text(
-                      _apiController.imagePoint.value.toInt().toString() + '点',
+                  child: Text(_apiController.imagePoint.value.toString() + '点',
                       style: TextStyle(fontSize: 50)),
                 ),
                 SizedBox(height: 80),

@@ -11,7 +11,7 @@ class ApiController extends GetxController {
   final AuthController _authController = Get.find();
 
   final userName = ''.obs;
-  final imagePoint = 0.0.obs;
+  final imagePoint = 0.obs;
   final myPosts = [].obs;
   final rankingPosts = [].obs;
 
@@ -105,7 +105,7 @@ class ApiController extends GetxController {
         var result = jsonDecode(utf8.decode(response.bodyBytes));
         print(result);
         var point = result['point'];
-        imagePoint.value = point * point / 10000;
+        imagePoint.value = point;
       });
     } catch (e) {
       print(e);
