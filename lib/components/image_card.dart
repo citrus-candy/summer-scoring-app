@@ -49,7 +49,8 @@ class ImageCard extends StatelessWidget {
                                 heroTag: heroTag,
                                 image: downloadUrl,
                                 userName: userName,
-                                userImage: userImage));
+                                userImage: userImage,
+                                point: point.toString()));
                           },
                           onTapCancel: () {
                             _hasPadding.value = false;

@@ -5,16 +5,16 @@ import 'package:get/get.dart';
 import '/controller/firebase_storage.dart';
 
 class PointDetailPage extends StatelessWidget {
-  PointDetailPage({this.heroTag, this.image, this.userName, this.userImage});
+  PointDetailPage(
+      {this.heroTag, this.image, this.userName, this.userImage, this.point});
 
   final StorageController _storageController = Get.find();
   final heroTag;
   final image;
   final userName;
   final userImage;
+  final point;
   var downloadUrl;
-  static const defaultImage =
-      "https://4.bp.blogspot.com/-CtY5GzX0imo/VCIixcXx6PI/AAAAAAAAmfY/AzH9OmbuHZQ/s170/animal_penguin.png";
   static const pointDetails = [
     ['ひまわり', '50'],
     ['そら', '30'],
@@ -42,7 +42,7 @@ class PointDetailPage extends StatelessWidget {
                       child: Column(children: [
                         Container(
                           alignment: Alignment.center,
-                          height: MediaQuery.of(context).size.height / 2,
+                          height: MediaQuery.of(context).size.height - 60,
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               fit: BoxFit.fitHeight,
@@ -55,48 +55,52 @@ class PointDetailPage extends StatelessWidget {
                           color: Get.theme.primaryColor,
                           child: SingleChildScrollView(
                               child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              FutureBuilder(
-                                  future: downloadImage(userImage),
-                                  builder: (_, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      return Container(
-                                        width: 50,
-                                        height: 50,
-                                        margin: EdgeInsets.only(right: 20),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          border: Border.all(
-                                              color: Colors.black, width: 1),
-                                          color: Colors.white,
-                                        ),
-                                        child: Image.network(downloadUrl),
-                                      );
-                                    } else {
-                                      return Container(
-                                        width: 50,
-                                        height: 50,
-                                        margin: EdgeInsets.only(right: 20),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          border: Border.all(
-                                              color: Colors.black, width: 1),
-                                          color: Colors.white,
-                                        ),
-                                      );
-                                    }
-                                  }),
-                              Text(
-                                userName,
-                                style: TextStyle(fontSize: 20),
-                              )
+                              Row(children: [
+                                FutureBuilder(
+                                    future: downloadImage(userImage),
+                                    builder: (_, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        return Container(
+                                          width: 50,
+                                          height: 50,
+                                          margin: EdgeInsets.only(right: 20),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            border: Border.all(
+                                                color: Colors.black, width: 1),
+                                            color: Colors.white,
+                                          ),
+                                          child: Image.network(downloadUrl),
+                                        );
+                                      } else {
+                                        return Container(
+                                          width: 50,
+                                          height: 50,
+                                          margin: EdgeInsets.only(right: 20),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            border: Border.all(
+                                                color: Colors.black, width: 1),
+                                            color: Colors.white,
+                                          ),
+                                        );
+                                      }
+                                    }),
+                                Text(userName, style: TextStyle(fontSize: 20)),
+                              ]),
+                              Container(
+                                  padding: EdgeInsets.only(right: 20),
+                                  child: Text(point + '点',
+                                      style: TextStyle(fontSize: 20)))
                             ],
                           )),
                         ),
-                        pointList(context)
+                        // pointList(context)
                       ])),
                   closeButton()
                 ]),

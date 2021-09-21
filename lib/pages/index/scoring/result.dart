@@ -34,11 +34,11 @@ class Result extends StatelessWidget {
                       style: TextStyle(fontSize: 50)),
                 ),
                 SizedBox(height: 80),
-                Button(
-                    buttonText: '詳しく見る',
-                    onPressed: () => Get.to(PointDetailPage(
-                        heroTag: 'heroTag', image: defaultImage))),
-                SizedBox(height: 30),
+                // Button(
+                //     buttonText: '詳しく見る',
+                //     onPressed: () => Get.to(PointDetailPage(
+                //         heroTag: 'heroTag', image: defaultImage))),
+                // SizedBox(height: 30),
                 Button(
                     buttonText: '閉じる',
                     onPressed: () {
