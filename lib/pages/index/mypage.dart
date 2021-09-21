@@ -50,10 +50,7 @@ class MyPage extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.change_circle),
                   title: Text('テーマの変更'),
-                  onTap: () {
-                    _apiController.createUserInfo(
-                        'test', '/avatar/2VS6/avatar.png');
-                  },
+                  onTap: () {},
                 ),
                 ListTile(
                   leading: Icon(Icons.quiz),

@@ -22,17 +22,19 @@ class StorageController extends GetxController {
           .putFile(file);
       print('RemoteImagePath : ' + result.ref.fullPath);
       uploadedAvatarUrl.value = 'avatars/' + folderName + '/avatar.png';
-      await downloadAvatar();
+      await downloadAvatar(uploadedAvatarUrl.value);
     } catch (e) {
       print(e);
     }
   }
 
-  Future downloadAvatar() async {
-    var folderName = _authController.uid.value.substring(0, 4);
-    downloadedAvatarUrl.value = await storage
-        .ref('avatars/' + folderName + '/avatar.png')
-        .getDownloadURL();
+  Future downloadAvatar(String url) async {
+    downloadedAvatarUrl.value = await storage.ref(url).getDownloadURL();
     print(downloadedAvatarUrl.value);
+  }
+
+  Future<String> downloadDefaultAvatar(String path) async {
+    var url = await storage.ref(path).getDownloadURL();
+    return url;
   }
 }

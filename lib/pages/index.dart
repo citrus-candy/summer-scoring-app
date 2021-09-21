@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '/components/loading_dialog.dart';
 import '/controller/api.dart';
 import '/controller/firebase_auth.dart';
 import '/controller/buttom_navigation_page.dart';
@@ -12,6 +13,7 @@ class TopPage extends StatefulWidget {
 
 class _TopPageState extends State {
   final _navigationController = Get.put(BottomNavigationPageController());
+  final _loadingDialog = LoadingDialog();
   final ApiController _apiController = Get.find();
   final AuthController _authController = Get.find();
 
@@ -20,6 +22,12 @@ class _TopPageState extends State {
     super.initState();
     _apiController.getUserInfo(_authController.idToken.value);
   }
+
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   _loadingDialog.show(context);
+  // }
 
   @override
   Widget build(BuildContext context) {

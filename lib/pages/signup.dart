@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/button.dart';
-import '../controller/firebase_auth.dart';
+import '/components/button.dart';
+import '/components/loading_dialog.dart';
+import '/controller/firebase_auth.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State {
   final AuthController _authController = Get.find();
+  final _loadingDialog = LoadingDialog();
   final emailControlller = TextEditingController();
   final passwordControlller = TextEditingController();
 
@@ -69,18 +71,7 @@ class _SignupPageState extends State {
                         onPressed: () {
                           FocusScope.of(context).unfocus();
                           // ローディング画面
-                          showGeneralDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              transitionDuration: Duration(milliseconds: 250),
-                              barrierColor: Colors.black.withOpacity(0.5),
-                              pageBuilder: (BuildContext context,
-                                  Animation animation,
-                                  Animation secondaryAnimation) {
-                                return Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              });
+                          _loadingDialog.show(context);
                           _authController
                               .createUserWithEmailAndPassword(
                                   emailControlller.text,

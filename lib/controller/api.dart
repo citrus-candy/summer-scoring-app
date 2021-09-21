@@ -70,7 +70,7 @@ class ApiController extends GetxController {
         var result = jsonDecode(utf8.decode(response.bodyBytes));
         print(result);
         userName.value = result['name'];
-        _storageController.downloadAvatar();
+        _storageController.downloadAvatar(result['img']);
       });
     } catch (e) {
       print(e);

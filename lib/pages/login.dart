@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/button.dart';
-import '../controller/firebase_auth.dart';
+import '/components/button.dart';
+import '/components/loading_dialog.dart';
+import '/controller/firebase_auth.dart';
 
 class LoginPage extends StatelessWidget {
   final AuthController _authController = Get.find();
+  final _loadingDialog = LoadingDialog();
   final emailControlller = TextEditingController();
   final passwordControlller = TextEditingController();
 
@@ -50,18 +52,7 @@ class LoginPage extends StatelessWidget {
                         buttonText: 'ログイン',
                         onPressed: () {
                           FocusScope.of(context).unfocus();
-                          showGeneralDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              transitionDuration: Duration(milliseconds: 250),
-                              barrierColor: Colors.black.withOpacity(0.5),
-                              pageBuilder: (BuildContext context,
-                                  Animation animation,
-                                  Animation secondaryAnimation) {
-                                return Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              });
+                          _loadingDialog.show(context);
                           _authController
                               .signInWithEmailAndPassword(emailControlller.text,
                                   passwordControlller.text)

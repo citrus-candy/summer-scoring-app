@@ -19,9 +19,7 @@ class _ProfileRegistarState extends State {
   final StorageController _storageController = Get.find();
   final ApiController _apiController = Get.find();
 
-  var pickedImage;
-  var defaultImage =
-      'assets/images/avatars/' + Random().nextInt(11).toString() + '.png';
+  var randomAvatar = Random().nextInt(11).toString();
   File? _image;
 
   @override
@@ -48,14 +46,15 @@ class _ProfileRegistarState extends State {
                     color: Colors.white,
                   ),
                   child: (_image == null)
-                      ? Image.asset(defaultImage)
+                      ? Image.asset(
+                          'assets/images/avatars/' + randomAvatar + '.png')
                       : Image.file(_image!),
                 ),
                 SizedBox(height: 20),
                 Button(
                     buttonText: '画像のアップロード',
                     onPressed: () async {
-                      pickedImage = await ImagePicker()
+                      var pickedImage = await ImagePicker()
                           .pickImage(source: ImageSource.gallery);
                       if (pickedImage!.path != '') {
                         setState(() {
@@ -84,16 +83,18 @@ class _ProfileRegistarState extends State {
                       else {
                         FocusScope.of(context).unfocus();
 
-                        if (pickedImage != null) {
+                        if (_image != null) {
                           await _storageController.uploadAvatar(_image!);
+                          await _apiController.createUserInfo(
+                              nameControlller.text,
+                              _storageController.uploadedAvatarUrl.value);
+                          print(_storageController.uploadedAvatarUrl.value);
                         } else {
-                          await _storageController
-                              .uploadAvatar(File(defaultImage));
+                          var url = 'avatars/default/' + randomAvatar + '.png';
+                          _storageController.downloadedAvatarUrl.value = url;
+                          await _apiController.createUserInfo(
+                              nameControlller.text, url);
                         }
-                        await _apiController.createUserInfo(
-                            nameControlller.text,
-                            _storageController.uploadedAvatarUrl.value);
-
                         Get.toNamed('/tutorial', arguments: true);
                         Get.snackbar("通知", 'プロフィール登録に成功しました',
                             backgroundColor: Colors.green.shade300);
