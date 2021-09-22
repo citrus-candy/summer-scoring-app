@@ -44,7 +44,7 @@ class _ScoringPageState extends State {
               Expanded(
                   child: PageView(
                 controller: _scoringController.controller.value,
-                // physics: NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 children: [ImageUpload(), NowScoring(), Result()],
                 onPageChanged: (page) {
                   setState(() {

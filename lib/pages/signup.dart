@@ -68,13 +68,13 @@ class _SignupPageState extends State {
                     SizedBox(height: 30),
                     Button(
                         buttonText: '登録',
-                        onPressed: () {
+                        onPressed: () async {
                           FocusScope.of(context).unfocus();
                           // ローディング画面
                           _loadingDialog.show(context);
-                          _authController.createUserWithEmailAndPassword(
+                          await _authController.createUserWithEmailAndPassword(
                               emailControlller.text, passwordControlller.text);
-                          _authController
+                          await _authController
                               .signInWithEmailAndPassword(emailControlller.text,
                                   passwordControlller.text)
                               .then((_) {

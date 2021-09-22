@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.spino.summer_scoring_app">
    <application
-        android:label="summer_scoring_app"
+        android:label="夏の赤ペン先生"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

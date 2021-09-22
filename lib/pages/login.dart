@@ -13,9 +13,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    emailControlller.text = 'hogefuga@fuga.com';
-    passwordControlller.text = 'hogefuga';
-
     return Scaffold(
       body: Container(
           color: Get.theme.backgroundColor,
@@ -50,10 +47,10 @@ class LoginPage extends StatelessWidget {
                     SizedBox(height: 30),
                     Button(
                         buttonText: 'ログイン',
-                        onPressed: () {
+                        onPressed: () async {
                           FocusScope.of(context).unfocus();
                           _loadingDialog.show(context);
-                          _authController
+                          await _authController
                               .signInWithEmailAndPassword(emailControlller.text,
                                   passwordControlller.text)
                               .then((_) {

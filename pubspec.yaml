@@ -38,10 +38,17 @@ dependencies:
   lottie: ^1.2.0
   http: ^0.13.3
   shared_preferences: ^2.0.8
+  flutter_launcher_icons: ^0.9.2
 
 flutter_native_splash:
   image: 'assets/images/logo_splash.png'
   color: '#99e6ff'
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path_android: 'assets/images/Icon-512.png'
+  image_path_ios: 'assets/images/Icon-1024.png'
 
 dev_dependencies:
   flutter_test:
