@@ -17,6 +17,7 @@ class ChangeThemePage extends StatelessWidget {
           primaryColor: Colors.orange.shade100,
           shadowColor: Colors.orange.shade50,
           backgroundColor: Colors.orange.shade50,
+          scaffoldBackgroundColor: Colors.orange.shade50,
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.orange))),
@@ -31,6 +32,7 @@ class ChangeThemePage extends StatelessWidget {
           primaryColor: Colors.cyan.shade100,
           shadowColor: Colors.cyan.shade50,
           backgroundColor: Colors.cyan.shade50,
+          scaffoldBackgroundColor: Colors.cyan.shade50,
           appBarTheme: AppBarTheme(
             backgroundColor: Colors.cyan.shade100,
           ),

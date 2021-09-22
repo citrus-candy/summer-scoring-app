@@ -71,17 +71,23 @@ class _SignupPageState extends State {
                         onPressed: () async {
                           FocusScope.of(context).unfocus();
                           // ローディング画面
+                          var isLoginSuccessful = false;
                           _loadingDialog.show(context);
-                          await _authController.createUserWithEmailAndPassword(
-                              emailControlller.text, passwordControlller.text);
                           await _authController
-                              .signInWithEmailAndPassword(emailControlller.text,
+                              .createUserWithEmailAndPassword(
+                                  emailControlller.text,
                                   passwordControlller.text)
-                              .then((_) {
-                            Get.toNamed('/registar');
-                            Get.snackbar("通知", "ユーザー登録に成功しました",
-                                backgroundColor: Colors.green.shade300);
-                          });
+                              .then((_) => isLoginSuccessful = true);
+                          if (isLoginSuccessful)
+                            await _authController
+                                .signInWithEmailAndPassword(
+                                    emailControlller.text,
+                                    passwordControlller.text)
+                                .then((_) {
+                              Get.toNamed('/registar');
+                              Get.snackbar("通知", "ユーザー登録に成功しました",
+                                  backgroundColor: Colors.green.shade300);
+                            });
                         })
                   ],
                 )),
