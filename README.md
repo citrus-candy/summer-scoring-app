@@ -1,141 +1,97 @@
 # 夏の赤ペン先生
 
+写真から夏っぽさを採点するスマホアプリ
+
+developed at ハックツハッカソン 〜スピノカップ〜 2021/9/20 - 22
+
+## 概要
+
+夏休み最終日。その夏を振り返りながら自分が過ごした夏の日々を採点しよう。
+
 ## 開発技術
 
-### フロントエンド
-
 - Flutter
+- FastAPI
+- Docker
+- Azure Container Instance
+- Azure Container Registory
+- Google vision api
+- Word2Vec
+- Firebase Authentication
+- Firebase Storage
+- PostgreSQL
+
+## リンク
+
+- [フロントエンド(ここ)](https://github.com/citrus-candy/summer-scoring-app)
+- [バックエンド](https://github.com/PigeonsHouse/spino-server)
+
+
+## インフラ構成図
+
+<img src="https://user-images.githubusercontent.com/43461456/147136173-bd3471c2-9e2f-4e4f-ad3d-632c9f64fd96.png" width="800px">
+
+## 役割分担
+
+### フロントエンド
+- [@citrus-candy](https://github.com/citrus-candy)
+  - Flutterはいいぞ！
+
+デザインや UI/UX にこだわりました。
+
+テーマの変更機能やチュートリアル画面を実装したり、Lottie というサービスでアニメーションを実装したりするなどユーザーに飽きさせないような工夫をしました。
 
 ### バックエンド
+- [@Simo-C3](https://github.com/Simo-C3)
+  - 初めてのバックエンド楽しかった！採点のとこきつかったです。。。
+- [@PigeonsHouse](https://github.com/PigeonsHouse)
+  - ハッカソン中にエンドポイントのテストを書き終えられたので満足です。☺
 
-- FastAPI
+ユーザー登録や画像採点、採点情報の取得、画像ごとやユーザーごとのランキングの取得などのエンドポイントを実装しました。
 
-### 認証
+また、それらのエンドポイントのテストコードも書き、エラーの少ないバックエンドになっております。
 
-- Firebase Authentication
+## 採点について
 
-### 採点
+点数は100点満点での採点です。
 
-- 画像
-  - Microsoft Azure - Computer Vision
-- 単語
-  - word2vec
+### 採点方法
 
-## API 仕様
+1. ユーザーの画像を Google vision api でラベル化
+2. 1.のラベルを Word2Vec のモデルを使い、解析（詳細略：GitHub のコード見て頂けると助かります）
+3. 点数を100点満点に換算
 
-| アクセス URI          | メソッド | 説明                           | クエリ | 説明         |
-| --------------------- | -------- | ------------------------------ | ------ | ------------ |
-| /api/v1/signup        | POST     | 　ユーザー登録                 |
-| /api/v1/scoring       | POST     | 　画像の採点                   |
-| /api/v1/ranking/posts | GET      | 　投稿ごとの点数ランキング取得 | limit  | 取得情報個数 |
-| /api/v1/posts/me      | GET      | 　自分の投稿取得               |
-| /api/v1/users/me      | GET      | 　自分のユーザー情報取得       |
+Google vision api でラベル化したものでNGワードに指定したものが含まれる場合問答無用で0点としています。
 
-### signup - ユーザー登録
+### Word2Vec のモデル作成について
 
-#### HEADERS
+Word2Vec は本来文章を形態素解析して学習させるものとなります。しかし、今回は画像から画像内の要素を単語化（ラベル化）し、その単語群で学習させました。目的は夏っぽい画像から取り出したラベル群の関係性を見つけるためとなっています。
 
-- Authorization: Bearer <token: string>
+Bing Image API でキーワード検索の結果（URL）を取得し、それを Cloud vision API に投げることでラベル化をしています。その、ラベルデータをテキストデータとして保存し、それを使って Word2Vec の学習を行いました。
 
-#### RESPONSE
+### 試行錯誤したこと
 
-| key        | 型        | 説明            |
-| ---------- | --------- | --------------- |
-| id         | string    | firebase の UID |
-| name       | string    | 　ユーザー名    |
-| created_at | timestamp | 　作成日時      |
-| updated_at | timestamp | 　更新日時      |
+- 複数のモデルを作り組み合わせて使う
+- モデルを使った別の解析方法
+- 教えてもらったサービスの使用検討
 
-### scoring - 画像の採点
+### 悪あがきしたこと
 
-#### HEADERS
+- ラベルに`Snow`が入っている場合は0点
 
-- Authorization: Bearer <token: string>
+### 結果
 
-#### REQUEST
+精度はあまり高くありませんでしたが一番良い結果が出た現在の方法を取っております。
 
-| key     | 型     | 説明     |
-| ------- | ------ | -------- |
-| img_url | string | 画像 URL |
+## 注意事項
 
-#### RESPONSE
+このアプリでの採点はあくまでネタとして見てください。投稿する画像や画像の種類よって夏の画像であっても点数が低く出ます。
 
-| key          | 型        | 説明                 |
-| ------------ | --------- | -------------------- |
-| id           | string    | index                |
-| user         | object    | ユーザー情報         |
-| - id         | string    | firebase の UID      |
-| - name       | string    | ユーザー名           |
-| - created_at | timestamp | 作成日時             |
-| - updated_at | timestamp | 更新日時             |
-| point        | float     | 採点した点数         |
-| rank_post    | int       | 投稿ごとのランク     |
-| rank_user    | int       | ユーザーごとのランク |
-| created_at   | timestamp | 　作成日時           |
-| updated_at   | timestamp | 　更新日時           |
+また、逆もしかりです。冬の画像でも高得点が出る可能性があります。
 
-### ranking/posts - 投稿ごとの点数ランキング取得
 
-#### HEADERS
+## スクリーンショット
 
-- Authorization: Bearer <token: string>
+右の画像は開発段階のものです！！なぜ、ポプテピの画像が高得点をたたき出したのかはわかっていません。。。。
 
-#### QUERY
-
-| key   | 型  | 説明         |
-| ----- | --- | ------------ |
-| limit | int | 取得情報個数 |
-
-#### RESPONSE
-
-| key            | 型        | 説明                 |
-| -------------- | --------- | -------------------- |
-|                | array     | ランキングの配列     |
-| - id           | string    | index                |
-| - user         | object    | ユーザー情報         |
-| - - id         | string    | firebase の UID      |
-| - - name       | string    | ユーザー名           |
-| - - created_at | timestamp | 作成日時             |
-| - - updated_at | timestamp | 更新日時             |
-| - point        | float     | 採点した点数         |
-| - rank_post    | int       | 投稿ごとのランク     |
-| - rank_user    | int       | ユーザーごとのランク |
-| - created_at   | timestamp | 　作成日時           |
-| - updated_at   | timestamp | 　更新日時           |
-
-### posts/me - 自分の投稿取得
-
-#### HEADERS
-
-- Authorization: Bearer <token: string>
-
-#### RESPONSE
-
-| key          | 型        | 説明                 |
-| ------------ | --------- | -------------------- |
-| id           | string    | index                |
-| user         | object    | ユーザー情報         |
-| - id         | string    | firebase の UID      |
-| - name       | string    | ユーザー名           |
-| - created_at | timestamp | 作成日時             |
-| - updated_at | timestamp | 更新日時             |
-| point        | float     | 採点した点数         |
-| rank_post    | int       | 投稿ごとのランク     |
-| rank_user    | int       | ユーザーごとのランク |
-| created_at   | timestamp | 　作成日時           |
-| updated_at   | timestamp | 　更新日時           |
-
-### users/me - 自分のユーザー情報取得
-
-#### HEADERS
-
-- Authorization: Bearer <token: string>
-
-#### RESPONSE
-
-| key        | 型        | 説明            |
-| ---------- | --------- | --------------- |
-| id         | string    | firebase の UID |
-| name       | string    | 　ユーザー名    |
-| created_at | timestamp | 　作成日時      |
-| updated_at | timestamp | 　更新日時      |
+<img src="https://user-images.githubusercontent.com/43461456/147136719-09750be4-8e28-40f6-bc80-e1506671fdbe.png" width="450px"><img src="https://user-images.githubusercontent.com/43461456/147136747-5952997e-2364-4d3a-94a1-bddf93d1a601.png" width="450px">
